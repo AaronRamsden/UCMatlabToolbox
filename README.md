@@ -6,7 +6,7 @@ _An Open-Source Unit Commitment Toolbox for Future Grid Modelling_
 
 ### Australian Energy Market Operator (AEMO)
 
-The contents of the folder `Input Traces/` were sourced from the AEMO. These files are publically available on the [AEMO website](https://www.aemo.com.au).
+The contents of the folder `input_traces/` were sourced from the AEMO. These files are publically available on the [AEMO website](https://www.aemo.com.au).
 
 ### Tim Holy
 
