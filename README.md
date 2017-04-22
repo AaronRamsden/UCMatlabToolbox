@@ -11,3 +11,7 @@ The contents of the folder `input_traces/` were sourced from the AEMO. These fil
 ### Tim Holy
 
 The contents of the folder `lib/distinguishable_colors/` is credited to Tim Holy and is redistributed under [license](lib/distinguishable_colors/license.txt) Copyright (c) 2010-2011. This function was sourced from [here](http://au.mathworks.com/matlabcentral/fileexchange/29702-generate-maximally-perceptually-distinct-colors?focused=5178885&tab=function).
+
+## Contribition
+
+Open a pull request if you would like to contribute to this Matlab toolbox.
