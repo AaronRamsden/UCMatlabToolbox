@@ -17,17 +17,22 @@ This work is intended for educational and research purposes only. The work is pu
 
 The contents of the folder `input_traces/` were sourced from the AEMO. These files are publically available on the [AEMO website](https://www.aemo.com.au). These traces and other useful data can be found by looking on the AEMO website under _Electricity_ &rarr; _Planning and Forecasting_ &rarr; _National Transmission Network Development Plan (NTNDP)_, and then looking around for databases or supporting material.
 
-### M. Gibbard and D. Vowles (School of Electrical and Electronic Engineering, The University of Adelaide, South Australia)
+### M. Gibbard and D. Vowles
 
 The 58-bus network model that is used in some of the case studies that are provided with the _UC Matlab Toolbox_ is based on the network model published in _Simplified 14-generator model of the SE Australian power system (Revision 3, June 2010)_ by M. Gibbard and D. Vowles.
+
+### J. Glover, M. Sarma, and T. Overbye
+
+The simple network model that is used in some of the case studies that are provided with the _UC Matlab Toolbox_ is based on a network model published in _Power System Analysis and Design, 5th ed. Cengage Learning, 2012_ by J. Glover, M. Sarma, and T. Overbye (Chapter 12, Example 12.8).
+
 
 ### Tim Holy
 
 The contents of the folder `lib/distinguishable_colors/` is credited to Tim Holy and is redistributed under [license](lib/distinguishable_colors/license.txt) Copyright (c) 2010-2011. This function was sourced from the [MathWorks File Exchange](http://au.mathworks.com/matlabcentral/fileexchange/29702-generate-maximally-perceptually-distinct-colors?focused=5178885&tab=function).
 
-### Andreas Novianto, Thomas Stewart, and Thomas Perrau
+### A. Novianto, T. Stewart, and T. Perrau
 
-A. Novianto, T. Stewart, and T. Perrau contributed to acquiring and processing the generator and demand data used in some of the case studies that are provided with the _UC Matlab Toolbox_.
+Andreas Novianto, Thomas Stewart, and Thomas Perrau contributed to acquiring and processing the generator and demand data used in some of the case studies that are provided with the _UC Matlab Toolbox_.
 
 ## Installation
 
@@ -44,7 +49,7 @@ Alternatively, clone the repository.
 
 ### Back-end Solver
 
-A back-end Mixed Integer Linear Programming (MILP) solver is required for the UC Matlab Toolbox.
+A Mixed Integer Linear Programming (MILP) back-end solver is required for the UC Matlab Toolbox.
 
 #### Cplex
 
@@ -60,9 +65,9 @@ Detailed installation instructions that may be useful have been publised by [Col
 
 The Matlab Optimisation Toolbox can be used as an alternative to Cplex. The benefit of this is that the Matlab Optimisation Toolbox is generally included in most Matlab installs. The drawback is that the computational time required to perform simulations will significantly increase compared to using Cplex. This may not be an issue for simple models (on the order of 10 busses).
 
-In order to use the The Matlab Optimisation Toolbox, the Matlab function [UCGUI_CPLEX_solver.m](UC_simulation/UCGUI_CPLEX_solver.m) will have to be modified to use the Matlab function _intlinprog_.
+In order to use the Matlab Optimisation Toolbox, the Matlab function [UCGUI_CPLEX_solver.m](UC_simulation/UCGUI_CPLEX_solver.m) will have to be modified to use the Matlab function _intlinprog_.
 
-More information on the The Matlab Optimisation Toolbox can be found on the MathWorks [website](http://au.mathworks.com/help/optim/index.html), or by typing `help intlinprog` in the Matlab command window.
+More information on the Matlab Optimisation Toolbox can be found on the MathWorks [website](http://au.mathworks.com/help/optim/index.html), or by typing `help intlinprog` in the Matlab command window.
 
 ## Contribition
 
