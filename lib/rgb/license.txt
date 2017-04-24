@@ -1,4 +1,4 @@
-Copyright (c) 2010-2011, Tim Holy
+Copyright (c) 2009, Kristjan Jonasson
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

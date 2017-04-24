@@ -51,6 +51,9 @@ for j = 1:g
       solar_input(j,:) = reshape(transpose(csvread(solar_trace_names{gen_index(j)},r1,c1,[r1, c1,  r2, c2])),1,h);
    end
 end
+% Solar traces found to have negative values (for example "LV Solar Real PV.csv").
+% This is a waste of computational time, but at least it is robust against AEMO's erroneous data:
+solar_input(solar_input<0) = 0;
 
 % Scale solar input traces to the power available to each generator:
 solar_input = solar_input.*repmat(solar_multiple.*p_cap,1,h);

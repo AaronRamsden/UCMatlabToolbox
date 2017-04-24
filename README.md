@@ -26,9 +26,9 @@ The 58-bus network model that is used in some of the case studies that are provi
 The simple network model that is used in some of the case studies that are provided with the _UC Matlab Toolbox_ is based on a network model published in _Power System Analysis and Design, 5th ed. Cengage Learning, 2012_ by J. Glover, M. Sarma, and T. Overbye (Chapter 12, Example 12.8).
 
 
-### Tim Holy
+### Kristjan Jonasson
 
-The contents of the folder `lib/distinguishable_colors/` is credited to Tim Holy and is redistributed under [license](lib/distinguishable_colors/license.txt) Copyright (c) 2010-2011. This function was sourced from the [MathWorks File Exchange](http://au.mathworks.com/matlabcentral/fileexchange/29702-generate-maximally-perceptually-distinct-colors?focused=5178885&tab=function).
+The contents of the folder `lib/rgb/` is credited to Kristjan Jonasson and is redistributed under [license](lib/rgb/license.txt) Copyright (c) 2009. This function was sourced from the [MathWorks File Exchange](https://au.mathworks.com/matlabcentral/fileexchange/24497-rgb-triple-of-color-name--version-2).
 
 ### A. Novianto, T. Stewart, and T. Perrau
 
