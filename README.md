@@ -65,7 +65,7 @@ Detailed installation instructions that may be useful have been publised by [Col
 
 The Matlab Optimisation Toolbox can be used as an alternative to Cplex. The benefit of this would be that the Matlab Optimisation Toolbox is included in most Matlab installs. The drawback is that the computational time required to perform simulations will significantly increase compared to using Cplex. This may not be an issue for simple models (on the order of 10 busses).
 
-In order to use the Matlab Optimisation Toolbox, the Matlab function [UCGUI_CPLEX_solver.m](UC_simulation/UCGUI_CPLEX_solver.m) will have to be modified to use the Matlab function _intlinprog_.
+In order to use the Matlab Optimisation Toolbox, the Matlab function [UCGUI_cplex_solver.m](UC_simulation/UCGUI_cplex_solver.m) will have to be modified to use the Matlab function _intlinprog_.
 
 More information on the Matlab Optimisation Toolbox can be found on the MathWorks [website](http://au.mathworks.com/help/optim/index.html), or by typing `help intlinprog` in the Matlab command window.
 

@@ -75,9 +75,9 @@ function UCGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 % All case study input values are defined here:
-global loops_simple_network; loops_simple_network = 15; % 15
-global keep_days_simple_network; keep_days_simple_network = 2; % 2
-global overlap_days_simple_network; overlap_days_simple_network = 6; % 6
+global loops_5bus_network; loops_5bus_network = 15; % 15
+global keep_days_5bus_network; keep_days_5bus_network = 2; % 2
+global overlap_days_5bus_network; overlap_days_5bus_network = 6; % 6
 global loops_58bus_network; loops_58bus_network = 30; % 30
 global keep_days_58bus_network; keep_days_58bus_network = 1; % 1
 global overlap_days_58bus_network; overlap_days_58bus_network = 3; % 3
@@ -91,12 +91,12 @@ global month_f; month_f = 2; % Same scenario to Case Study E (for direct compari
 global month_58bus; month_58bus = 1; % NEM peak on 11 Jan 2016 (all 58-bus case studies use the same date)
 global year; year = 2016;
 global time_step_length; time_step_length = 1; % 1 = 60 mins, 2 = 30 mins, 3 = 15 mins, 4 = 5 mins.
-global file_name_cs_simple_a; file_name_cs_simple_a = 'UC_case_study_simple_network_A.xlsx';
-global file_name_cs_simple_b; file_name_cs_simple_b = 'UC_case_study_simple_network_B.xlsx';
-global file_name_cs_simple_c; file_name_cs_simple_c = 'UC_case_study_simple_network_C.xlsx';
-global file_name_cs_simple_d; file_name_cs_simple_d = 'UC_case_study_simple_network_D.xlsx';
-global file_name_cs_simple_e; file_name_cs_simple_e = 'UC_case_study_simple_network_E.xlsx';
-global file_name_cs_simple_f; file_name_cs_simple_f = 'UC_case_study_simple_network_F.xlsx';
+global file_name_cs_5bus_a; file_name_cs_5bus_a = 'UC_case_study_5bus_network_A.xlsx';
+global file_name_cs_5bus_b; file_name_cs_5bus_b = 'UC_case_study_5bus_network_B.xlsx';
+global file_name_cs_5bus_c; file_name_cs_5bus_c = 'UC_case_study_5bus_network_C.xlsx';
+global file_name_cs_5bus_d; file_name_cs_5bus_d = 'UC_case_study_5bus_network_D.xlsx';
+global file_name_cs_5bus_e; file_name_cs_5bus_e = 'UC_case_study_5bus_network_E.xlsx';
+global file_name_cs_5bus_f; file_name_cs_5bus_f = 'UC_case_study_5bus_network_F.xlsx';
 global file_name_cs_58bus_a; file_name_cs_58bus_a = 'UC_case_study_58bus_network_A.xlsx';
 global file_name_cs_58bus_b; file_name_cs_58bus_b = 'UC_case_study_58bus_network_B.xlsx';
 global file_name_cs_58bus_c; file_name_cs_58bus_c = 'UC_case_study_58bus_network_C.xlsx';
@@ -104,18 +104,18 @@ global file_name_cs_58bus_d; file_name_cs_58bus_d = 'UC_case_study_58bus_network
 global file_name_cs_58bus_e; file_name_cs_58bus_e = 'UC_case_study_58bus_network_E.xlsx';
 global file_name_cs_58bus_f; file_name_cs_58bus_f = 'UC_case_study_58bus_network_F.xlsx';
 global spinning_reserve; spinning_reserve = 0.1;
-global rooftop_pv_simple; rooftop_pv_simple = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
-global rooftop_pv_simple_c; rooftop_pv_simple_c = 10000; % This case study has extra rooftop PV
+global rooftop_pv_5bus; rooftop_pv_5bus = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
+global rooftop_pv_5bus_c; rooftop_pv_5bus_c = 10000; % This case study has extra rooftop PV
 global rooftop_pv_58bus; rooftop_pv_58bus = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
 global subtract_rooftop_pv; subtract_rooftop_pv = 0;
 global copper_plate; copper_plate = 0;
 global save_results; save_results = 1;
-global save_name_cs_simple_a; save_name_cs_simple_a = 'UC_case_study_simple_network_A';
-global save_name_cs_simple_b; save_name_cs_simple_b = 'UC_case_study_simple_network_B';
-global save_name_cs_simple_c; save_name_cs_simple_c = 'UC_case_study_simple_network_C';
-global save_name_cs_simple_d; save_name_cs_simple_d = 'UC_case_study_simple_network_D';
-global save_name_cs_simple_e; save_name_cs_simple_e = 'UC_case_study_simple_network_E';
-global save_name_cs_simple_f; save_name_cs_simple_f = 'UC_case_study_simple_network_F';
+global save_name_cs_5bus_a; save_name_cs_5bus_a = 'UC_case_study_5bus_network_A';
+global save_name_cs_5bus_b; save_name_cs_5bus_b = 'UC_case_study_5bus_network_B';
+global save_name_cs_5bus_c; save_name_cs_5bus_c = 'UC_case_study_5bus_network_C';
+global save_name_cs_5bus_d; save_name_cs_5bus_d = 'UC_case_study_5bus_network_D';
+global save_name_cs_5bus_e; save_name_cs_5bus_e = 'UC_case_study_5bus_network_E';
+global save_name_cs_5bus_f; save_name_cs_5bus_f = 'UC_case_study_5bus_network_F';
 global save_name_cs_58bus_a; save_name_cs_58bus_a = 'UC_case_study_58bus_network_A';
 global save_name_cs_58bus_b; save_name_cs_58bus_b = 'UC_case_study_58bus_network_B';
 global save_name_cs_58bus_c; save_name_cs_58bus_c = 'UC_case_study_58bus_network_C';
@@ -123,19 +123,19 @@ global save_name_cs_58bus_d; save_name_cs_58bus_d = 'UC_case_study_58bus_network
 global save_name_cs_58bus_e; save_name_cs_58bus_e = 'UC_case_study_58bus_network_E';
 global save_name_cs_58bus_f; save_name_cs_58bus_f = 'UC_case_study_58bus_network_F';
 
-% Set up Case Study - Simple Network Case Study A as the default:
-% Turn on the Simple Network Case Study A selection:
-set(handles.radio_cs_simple_a,'Value',1);
+% Set up Case Study - 5-bus Network Case Study A as the default:
+% Turn on the 5-bus Network Case Study A selection:
+set(handles.radio_cs_5bus_a,'Value',1);
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-% set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+% set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -146,12 +146,12 @@ set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -171,8 +171,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_a,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -184,15 +184,15 @@ set(handles.radio_full_dc,'Value',copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_a;
-set(handles.edit_file_name,'String',file_name_cs_simple_a);
+handles.user_input_data.file_name = file_name_cs_5bus_a;
+set(handles.edit_file_name,'String',file_name_cs_5bus_a);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_a;
-set(handles.edit_save_name,'String',save_name_cs_simple_a);
+handles.user_input_data.save_name = save_name_cs_5bus_a;
+set(handles.edit_save_name,'String',save_name_cs_5bus_a);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_a);
+set(handles.edit_load_name,'String',save_name_cs_5bus_a);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -653,13 +653,13 @@ if User_defined_input == 0;
 end
 
 % Turn off the other selections:
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -695,18 +695,18 @@ set(handles.edit_save_name,'Enable','on');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_a.
-function radio_cs_simple_a_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_a.
+function radio_cs_5bus_a_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-% set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+% set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -716,27 +716,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_a;
 global year;
-global file_name_cs_simple_a;
+global file_name_cs_5bus_a;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_5bus;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_a;
+global save_name_cs_5bus_a;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -756,8 +756,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_a,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -769,15 +769,15 @@ set(handles.radio_full_dc,'Value',copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_a;
-set(handles.edit_file_name,'String',file_name_cs_simple_a);
+handles.user_input_data.file_name = file_name_cs_5bus_a;
+set(handles.edit_file_name,'String',file_name_cs_5bus_a);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_a;
-set(handles.edit_save_name,'String',save_name_cs_simple_a);
+handles.user_input_data.save_name = save_name_cs_5bus_a;
+set(handles.edit_save_name,'String',save_name_cs_5bus_a);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_a);
+set(handles.edit_load_name,'String',save_name_cs_5bus_a);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -806,20 +806,20 @@ set(handles.edit_save_name,'Enable','off');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_b.
-function radio_cs_simple_b_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_b.
+function radio_cs_5bus_b_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-% set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+% set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -829,27 +829,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_b;
 global year;
-global file_name_cs_simple_b;
+global file_name_cs_5bus_b;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_5bus;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_b;
+global save_name_cs_5bus_b;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -869,8 +869,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_b,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -882,15 +882,15 @@ set(handles.radio_full_dc,'Value',~copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_b;
-set(handles.edit_file_name,'String',file_name_cs_simple_b);
+handles.user_input_data.file_name = file_name_cs_5bus_b;
+set(handles.edit_file_name,'String',file_name_cs_5bus_b);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_b;
-set(handles.edit_save_name,'String',save_name_cs_simple_b);
+handles.user_input_data.save_name = save_name_cs_5bus_b;
+set(handles.edit_save_name,'String',save_name_cs_5bus_b);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_b);
+set(handles.edit_load_name,'String',save_name_cs_5bus_b);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -919,18 +919,18 @@ set(handles.edit_save_name,'Enable','off');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_c.
-function radio_cs_simple_c_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_c.
+function radio_cs_5bus_c_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-% set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+% set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -940,27 +940,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_c;
 global year;
-global file_name_cs_simple_c;
+global file_name_cs_5bus_c;
 global spinning_reserve;
-global rooftop_pv_simple_c;
+global rooftop_pv_5bus_c;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_c;
+global save_name_cs_5bus_c;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -980,8 +980,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_c,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple_c;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple_c);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus_c;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus_c);
 handles.user_input_data.subtract_rooftop_pv = ~subtract_rooftop_pv; % Subtract rooftop PV from demand for this case study only.
 set(handles.radio_subtract_rooftop_pv,'Value',~subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',subtract_rooftop_pv);
@@ -993,15 +993,15 @@ set(handles.radio_full_dc,'Value',~copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_c;
-set(handles.edit_file_name,'String',file_name_cs_simple_c);
+handles.user_input_data.file_name = file_name_cs_5bus_c;
+set(handles.edit_file_name,'String',file_name_cs_5bus_c);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_c;
-set(handles.edit_save_name,'String',save_name_cs_simple_c);
+handles.user_input_data.save_name = save_name_cs_5bus_c;
+set(handles.edit_save_name,'String',save_name_cs_5bus_c);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_c);
+set(handles.edit_load_name,'String',save_name_cs_5bus_c);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -1030,18 +1030,18 @@ set(handles.edit_save_name,'Enable','off');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_d.
-function radio_cs_simple_d_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_d.
+function radio_cs_5bus_d_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-% set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+% set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1051,27 +1051,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_d;
 global year;
-global file_name_cs_simple_d;
+global file_name_cs_5bus_d;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_5bus;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_d;
+global save_name_cs_5bus_d;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -1091,8 +1091,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_d,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -1104,15 +1104,15 @@ set(handles.radio_full_dc,'Value',~copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_d;
-set(handles.edit_file_name,'String',file_name_cs_simple_d);
+handles.user_input_data.file_name = file_name_cs_5bus_d;
+set(handles.edit_file_name,'String',file_name_cs_5bus_d);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_d;
-set(handles.edit_save_name,'String',save_name_cs_simple_d);
+handles.user_input_data.save_name = save_name_cs_5bus_d;
+set(handles.edit_save_name,'String',save_name_cs_5bus_d);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_d);
+set(handles.edit_load_name,'String',save_name_cs_5bus_d);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -1141,18 +1141,18 @@ set(handles.edit_save_name,'Enable','off');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_e.
-function radio_cs_simple_e_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_e.
+function radio_cs_5bus_e_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-% set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+% set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1162,27 +1162,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_e;
 global year;
-global file_name_cs_simple_e;
+global file_name_cs_5bus_e;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_5bus;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_e;
+global save_name_cs_5bus_e;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -1202,8 +1202,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_e,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -1215,15 +1215,15 @@ set(handles.radio_full_dc,'Value',~copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_e;
-set(handles.edit_file_name,'String',file_name_cs_simple_e);
+handles.user_input_data.file_name = file_name_cs_5bus_e;
+set(handles.edit_file_name,'String',file_name_cs_5bus_e);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_e;
-set(handles.edit_save_name,'String',save_name_cs_simple_e);
+handles.user_input_data.save_name = save_name_cs_5bus_e;
+set(handles.edit_save_name,'String',save_name_cs_5bus_e);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_e);
+set(handles.edit_load_name,'String',save_name_cs_5bus_e);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -1252,18 +1252,18 @@ set(handles.edit_save_name,'Enable','off');
 % Update handles structure:
 guidata(hObject, handles);
 
-% --- Executes on button press in radio_cs_simple_f.
-function radio_cs_simple_f_Callback(hObject, eventdata, handles)
+% --- Executes on button press in radio_cs_5bus_f.
+function radio_cs_5bus_f_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-% set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+% set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1273,27 +1273,27 @@ set(handles.radio_cs_58bus_e,'Value',0);
 set(handles.radio_cs_58bus_f,'Value',0);
 
 % Set all of the default values for both the UC_simulation and the GUI display:
-global loops_simple_network;
-global keep_days_simple_network;
-global overlap_days_simple_network;
+global loops_5bus_network;
+global keep_days_5bus_network;
+global overlap_days_5bus_network;
 global time_step_length;
 global day;
 global month_f;
 global year;
-global file_name_cs_simple_f;
+global file_name_cs_5bus_f;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_5bus;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
-global save_name_cs_simple_f;
+global save_name_cs_5bus_f;
 % Time frame panel:
-handles.user_input_data.loops = loops_simple_network;
-set(handles.edit_loops,'String',loops_simple_network);
-handles.user_input_data.keep_days = keep_days_simple_network;
-set(handles.edit_keep_days,'String',keep_days_simple_network);
-handles.user_input_data.overlap_days = overlap_days_simple_network;
-set(handles.edit_overlap_days,'String',overlap_days_simple_network);
+handles.user_input_data.loops = loops_5bus_network;
+set(handles.edit_loops,'String',loops_5bus_network);
+handles.user_input_data.keep_days = keep_days_5bus_network;
+set(handles.edit_keep_days,'String',keep_days_5bus_network);
+handles.user_input_data.overlap_days = overlap_days_5bus_network;
+set(handles.edit_overlap_days,'String',overlap_days_5bus_network);
 switch(time_step_length)
     case 1 % 60 mins
         handles.user_input_data.time_step_length = 1;
@@ -1313,8 +1313,8 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_f,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
 handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
 set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
 set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
@@ -1326,15 +1326,15 @@ set(handles.radio_full_dc,'Value',~copper_plate);
 handles.user_input_data.spinning_reserve = spinning_reserve;
 set(handles.edit_spinning_reserve,'String',spinning_reserve*100);
 % Input file name panel:
-handles.user_input_data.file_name = file_name_cs_simple_f;
-set(handles.edit_file_name,'String',file_name_cs_simple_f);
+handles.user_input_data.file_name = file_name_cs_5bus_f;
+set(handles.edit_file_name,'String',file_name_cs_5bus_f);
 % save results panel:
 handles.user_input_data.save_results = save_results;
 set(handles.radio_save,'Value',save_results);
-handles.user_input_data.save_name = save_name_cs_simple_f;
-set(handles.edit_save_name,'String',save_name_cs_simple_f);
+handles.user_input_data.save_name = save_name_cs_5bus_f;
+set(handles.edit_save_name,'String',save_name_cs_5bus_f);
 % Plotting panel:
-set(handles.edit_load_name,'String',save_name_cs_simple_f);
+set(handles.edit_load_name,'String',save_name_cs_5bus_f);
 
 % Turn off the user input fields:
 % Time frame panel:
@@ -1368,13 +1368,13 @@ function radio_cs_58bus_a_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 % set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1479,13 +1479,13 @@ function radio_cs_58bus_b_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 % set(handles.radio_cs_58bus_b,'Value',0);
@@ -1590,13 +1590,13 @@ function radio_cs_58bus_c_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1701,13 +1701,13 @@ function radio_cs_58bus_d_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1812,13 +1812,13 @@ function radio_cs_58bus_e_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
@@ -1923,13 +1923,13 @@ function radio_cs_58bus_f_Callback(hObject, eventdata, handles)
 % Turn off the other selections:
 % User defined input:
 set(handles.radio_user_defined_input,'Value',0);
-% Simple Network:
-set(handles.radio_cs_simple_a,'Value',0);
-set(handles.radio_cs_simple_b,'Value',0);
-set(handles.radio_cs_simple_c,'Value',0);
-set(handles.radio_cs_simple_d,'Value',0);
-set(handles.radio_cs_simple_e,'Value',0);
-set(handles.radio_cs_simple_f,'Value',0);
+% 5-bus Network:
+set(handles.radio_cs_5bus_a,'Value',0);
+set(handles.radio_cs_5bus_b,'Value',0);
+set(handles.radio_cs_5bus_c,'Value',0);
+set(handles.radio_cs_5bus_d,'Value',0);
+set(handles.radio_cs_5bus_e,'Value',0);
+set(handles.radio_cs_5bus_f,'Value',0);
 % 58-bus Network:
 set(handles.radio_cs_58bus_a,'Value',0);
 set(handles.radio_cs_58bus_b,'Value',0);
