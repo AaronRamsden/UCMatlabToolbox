@@ -80,12 +80,12 @@ global keep_days_simple_network; keep_days_simple_network = 2; % 2
 global overlap_days_simple_network; overlap_days_simple_network = 6; % 6
 global loops_58bus_network; loops_58bus_network = 30; % 30
 global keep_days_58bus_network; keep_days_58bus_network = 1; % 1
-global overlap_days_58bus_network; overlap_days_58bus_network = 1; % 3
+global overlap_days_58bus_network; overlap_days_58bus_network = 3; % 3
 global day; day = 1;
 global month_a; month_a = 1; % NEM peak on 11 Jan 2016
 global month_b; month_b = 1; % Same scenario to Case Study A (for direct comparison)
-global month_c; month_c = 11; % November for CST (interesting gas dispatch)
-global month_d; month_d = 4; % April for high PV (lower demand during the middle of the day)
+global month_c; month_c = 4; % April for high PV (lower demand during the middle of the day)
+global month_d; month_d = 11; % November for CST (interesting gas dispatch)
 global month_e; month_e = 2; % February (because it shows interesting gas behaviour even when coal is not at max output)
 global month_f; month_f = 2; % Same scenario to Case Study E (for direct comparison)
 global month_58bus; month_58bus = 1; % NEM peak on 11 Jan 2016 (all 58-bus case studies use the same date)
@@ -105,7 +105,7 @@ global file_name_cs_58bus_e; file_name_cs_58bus_e = 'UC_case_study_58bus_network
 global file_name_cs_58bus_f; file_name_cs_58bus_f = 'UC_case_study_58bus_network_F.xlsx';
 global spinning_reserve; spinning_reserve = 0.1;
 global rooftop_pv_simple; rooftop_pv_simple = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
-global rooftop_pv_simple_d; rooftop_pv_simple_d = 10000; % This case study has extra rooftop PV
+global rooftop_pv_simple_c; rooftop_pv_simple_c = 10000; % This case study has extra rooftop PV
 global rooftop_pv_58bus; rooftop_pv_58bus = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
 global subtract_rooftop_pv; subtract_rooftop_pv = 0;
 global copper_plate; copper_plate = 0;
@@ -949,7 +949,7 @@ global month_c;
 global year;
 global file_name_cs_simple_c;
 global spinning_reserve;
-global rooftop_pv_simple;
+global rooftop_pv_simple_c;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
@@ -980,11 +980,11 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_c,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.rooftop_pv = rooftop_pv_simple_c;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_simple_c);
+handles.user_input_data.subtract_rooftop_pv = ~subtract_rooftop_pv; % Subtract rooftop PV from demand for this case study only.
+set(handles.radio_subtract_rooftop_pv,'Value',~subtract_rooftop_pv);
+set(handles.radio_add_rooftop_pv,'Value',subtract_rooftop_pv);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1060,7 +1060,7 @@ global month_d;
 global year;
 global file_name_cs_simple_d;
 global spinning_reserve;
-global rooftop_pv_simple_d; % This case study has extra rooftop PV
+global rooftop_pv_simple;
 global subtract_rooftop_pv;
 global copper_plate;
 global save_results;
@@ -1091,11 +1091,11 @@ handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
 handles.user_input_data.start_day = UCGUI_get_start_day(day,month_d,year);
 % Rooftop PV panel:
-handles.user_input_data.rooftop_pv = rooftop_pv_simple_d;
-set(handles.edit_rooftop_pv,'String',rooftop_pv_simple_d);
-handles.user_input_data.subtract_rooftop_pv = ~subtract_rooftop_pv; % Subtract rooftop PV from demand for this case study only.
-set(handles.radio_subtract_rooftop_pv,'Value',~subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',subtract_rooftop_pv);
+handles.user_input_data.rooftop_pv = rooftop_pv_simple;
+set(handles.edit_rooftop_pv,'String',rooftop_pv_simple);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
