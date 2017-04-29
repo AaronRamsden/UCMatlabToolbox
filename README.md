@@ -9,7 +9,7 @@ School of Electrical & Information Engineering, Faculty of Engineering and Infor
 
 ## License
 
-This work is intended for educational and research purposes only. The work is published under the [GNU General Public License v3.0](LICENSE.md). Please contact authors for commercial licensing options.
+This work is intended for educational and research purposes only. The work is published under the [GNU General Public License v3.0](LICENSE.md).
 
 ## Attribution
 
