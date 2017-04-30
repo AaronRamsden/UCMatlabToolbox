@@ -117,6 +117,7 @@ clear gen_data
 [~,text,~] = xlsread(file_name,'Node index','D2:E999');
 rooftop_pv_names = text(:,1);
 rooftop_pv_colours = text(:,2);
+[node_num,~,~] = xlsread(file_name,'Node index','A2:A999');
 clear text
 
 %% Bus characteristics:
@@ -159,8 +160,9 @@ UC_result.solar_input = zeros(g,t_keep*loops);
 
 %% Save total demand in network and rooftop PV in each node:
 
-[network_demand,UC_result.rooftop_pv_generation] = UCGUI_demand_rooftop_pv(file_name,loops*keep_days,start_day+keep_days,rooftop_pv,subtract_rooftop_pv,time_step_length);
+[network_demand,UC_result.rooftop_pv_generation,node_demand] = UCGUI_demand_rooftop_pv(file_name,loops*keep_days,start_day+keep_days,rooftop_pv,subtract_rooftop_pv,time_step_length);
 UC_result.network_demand = sum(network_demand,1); % Sum of demand at all load centres
+UC_result.node_demand = node_demand; % Demand at each node
 
 %% Initial conditions (will be updated after each loop):
 
@@ -190,7 +192,7 @@ for iteration = iteration:loops
     %% Demand, Solar Input, and Wind traces (1st hour is 12am-1am):
     
     % Demand: Start day 1 = 1/7/2014
-    [UC_input.demand,~] = UCGUI_demand_rooftop_pv(file_name,sim_days,start_day,rooftop_pv,subtract_rooftop_pv,time_step_length);
+    [UC_input.demand,~,~] = UCGUI_demand_rooftop_pv(file_name,sim_days,start_day,rooftop_pv,subtract_rooftop_pv,time_step_length);
     
     % Solar Input: Start day 1 = 1/7/2014
     UC_input.solar_input = UCGUI_solar(file_name,sim_days,start_day,p_cap,type,solar_multiple,gen_index,time_step_length);
@@ -305,6 +307,7 @@ plotting.gen_colours = gen_colours;
 plotting.rooftop_pv_colours = rooftop_pv_colours;
 plotting.gen_names = gen_names;
 plotting.rooftop_pv_names = rooftop_pv_names;
+plotting.node_num = node_num;
 
 %% Output to console:
 

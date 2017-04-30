@@ -1,4 +1,4 @@
-function [ demand_bus_trace,pv_node_trace ] = UCGUI_demand_rooftop_pv(file_name, num_days, start_day, rooftop_pv, subtract_rooftop_pv, time_step_length)
+function [ demand_bus_trace,pv_node_trace,demand_node_trace ] = UCGUI_demand_rooftop_pv(file_name, num_days, start_day, rooftop_pv, subtract_rooftop_pv, time_step_length)
 % UCGUI_demand_rooftop_pv returns demand at each bus as a b*t matrix.
 % 
 % Rows correspond to busses, columns correspond to individual time-steps.
@@ -97,5 +97,6 @@ end
 
 demand_bus_trace = repelem(demand_bus_trace,1,1/time_step_length);
 pv_node_trace = repelem(pv_node_trace,1,1/time_step_length);
+demand_node_trace = repelem(demand_node_trace,1,1/time_step_length);
 
 end
