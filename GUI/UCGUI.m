@@ -75,19 +75,20 @@ function UCGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 % All case study input values are defined here:
-global loops_5bus_network; loops_5bus_network = 15; % 15
+global loops_5bus_network; loops_5bus_network = 5; % 15
 global keep_days_5bus_network; keep_days_5bus_network = 2; % 2
 global overlap_days_5bus_network; overlap_days_5bus_network = 6; % 6
 global loops_58bus_network; loops_58bus_network = 30; % 30
 global keep_days_58bus_network; keep_days_58bus_network = 1; % 1
 global overlap_days_58bus_network; overlap_days_58bus_network = 3; % 3
-global day; day = 1;
-global month_a; month_a = 1; % NEM peak on 11 Jan 2016
-global month_b; month_b = 1; % Same scenario to Case Study A (for direct comparison)
-global month_c; month_c = 11; % Same scenario to Case Study D (for direct comparison)
-global month_d; month_d = 11; % November for CST (interesting gas dispatch)
-global month_e; month_e = 2; % February (because it shows interesting gas behaviour even when coal is not at max output)
-global month_f; month_f = 2; % Same scenario to Case Study E (for direct comparison)
+global day_5bus; day_5bus = 9;
+global day_58bus; day_58bus = 1;
+global month_a; month_a = 1; % NEM peak on 11 Jan 2016 (all 58-bus case studies use the same date)
+global month_b; month_b = 1;
+global month_c; month_c = 1;
+global month_d; month_d = 1;
+global month_e; month_e = 1;
+global month_f; month_f = 1;
 global month_58bus; month_58bus = 1; % NEM peak on 11 Jan 2016 (all 58-bus case studies use the same date)
 global year; year = 2016;
 global time_step_length; time_step_length = 1; % 1 = 60 mins, 2 = 30 mins, 3 = 15 mins, 4 = 5 mins.
@@ -105,9 +106,10 @@ global file_name_cs_58bus_e; file_name_cs_58bus_e = 'UC_case_study_58bus_network
 global file_name_cs_58bus_f; file_name_cs_58bus_f = 'UC_case_study_58bus_network_F.xlsx';
 global spinning_reserve; spinning_reserve = 0.1;
 global rooftop_pv_5bus; rooftop_pv_5bus = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
-global rooftop_pv_5bus_cd; rooftop_pv_5bus_cd = 12000; % This case study has extra rooftop PV
+global rooftop_pv_5bus_cd; rooftop_pv_5bus_cd = 12000; % These case studies have extra rooftop PV
 global rooftop_pv_58bus; rooftop_pv_58bus = 4102; % 4102 MW - From "Detailed summary of 2015 electricity forecasts.pdf" for NEM
-global subtract_rooftop_pv; subtract_rooftop_pv = 0;
+global subtract_rooftop_pv_5bus; subtract_rooftop_pv_5bus = 1;
+global subtract_rooftop_pv_58bus; subtract_rooftop_pv_58bus = 0;
 global copper_plate; copper_plate = 0;
 global save_results; save_results = 1;
 global save_name_cs_5bus_a; save_name_cs_5bus_a = 'UC_case_study_5bus_network_A';
@@ -163,19 +165,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_a;
 set(handles.edit_month,'String',month_a);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_a,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_a,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel (turn on copper plate):
 handles.user_input_data.copper_plate = ~copper_plate;
 set(handles.radio_copper_plate,'Value',~copper_plate);
@@ -720,13 +722,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_a;
 global year;
 global file_name_cs_5bus_a;
 global spinning_reserve;
 global rooftop_pv_5bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_a;
@@ -748,19 +750,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_a;
 set(handles.edit_month,'String',month_a);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_a,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_a,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel (turn on copper plate):
 handles.user_input_data.copper_plate = ~copper_plate;
 set(handles.radio_copper_plate,'Value',~copper_plate);
@@ -833,13 +835,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_b;
 global year;
 global file_name_cs_5bus_b;
 global spinning_reserve;
 global rooftop_pv_5bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_b;
@@ -861,19 +863,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_b;
 set(handles.edit_month,'String',month_b);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_b,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_b,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -944,13 +946,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_c;
 global year;
 global file_name_cs_5bus_c;
 global spinning_reserve;
 global rooftop_pv_5bus_cd;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_c;
@@ -972,19 +974,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_c;
 set(handles.edit_month,'String',month_c);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_c,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_c,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus_cd;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus_cd);
-handles.user_input_data.subtract_rooftop_pv = ~subtract_rooftop_pv; % subtract PV for this case study.
-set(handles.radio_subtract_rooftop_pv,'Value',~subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1055,13 +1057,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_d;
 global year;
 global file_name_cs_5bus_d;
 global spinning_reserve;
 global rooftop_pv_5bus_cd;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_d;
@@ -1083,19 +1085,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_d;
 set(handles.edit_month,'String',month_d);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_d,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_d,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus_cd;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus_cd);
-handles.user_input_data.subtract_rooftop_pv = ~subtract_rooftop_pv; % subtract PV for this case study.
-set(handles.radio_subtract_rooftop_pv,'Value',~subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1166,13 +1168,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_e;
 global year;
 global file_name_cs_5bus_e;
 global spinning_reserve;
 global rooftop_pv_5bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_e;
@@ -1194,19 +1196,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_e;
 set(handles.edit_month,'String',month_e);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_e,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_e,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1277,13 +1279,13 @@ global loops_5bus_network;
 global keep_days_5bus_network;
 global overlap_days_5bus_network;
 global time_step_length;
-global day;
+global day_5bus;
 global month_f;
 global year;
 global file_name_cs_5bus_f;
 global spinning_reserve;
 global rooftop_pv_5bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_5bus;
 global copper_plate;
 global save_results;
 global save_name_cs_5bus_f;
@@ -1305,19 +1307,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_5bus;
+set(handles.edit_day,'String',day_5bus);
 handles.user_input_data.month = month_f;
 set(handles.edit_month,'String',month_f);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_f,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_5bus,month_f,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_5bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_5bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_5bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_5bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_5bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1388,13 +1390,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_a;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_a;
@@ -1416,19 +1418,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel (turn on copper plate):
 handles.user_input_data.copper_plate = ~copper_plate;
 set(handles.radio_copper_plate,'Value',~copper_plate);
@@ -1499,13 +1501,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_b;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_b;
@@ -1527,19 +1529,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1610,13 +1612,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_c;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_c;
@@ -1638,19 +1640,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1721,13 +1723,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_d;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_d;
@@ -1749,19 +1751,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel:
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1832,13 +1834,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_e;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_e;
@@ -1860,19 +1862,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel (turn off copper plate selection):
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
@@ -1943,13 +1945,13 @@ global loops_58bus_network;
 global keep_days_58bus_network;
 global overlap_days_58bus_network;
 global time_step_length;
-global day;
+global day_58bus;
 global month_58bus;
 global year;
 global file_name_cs_58bus_f;
 global spinning_reserve;
 global rooftop_pv_58bus;
-global subtract_rooftop_pv;
+global subtract_rooftop_pv_58bus;
 global copper_plate;
 global save_results;
 global save_name_cs_58bus_f;
@@ -1971,19 +1973,19 @@ switch(time_step_length)
         handles.user_input_data.time_step_length = 5/60;
 end
 set(handles.pop_time_step_length,'Value',time_step_length);
-handles.user_input_data.day = day;
-set(handles.edit_day,'String',day);
+handles.user_input_data.day = day_58bus;
+set(handles.edit_day,'String',day_58bus);
 handles.user_input_data.month = month_58bus;
 set(handles.edit_month,'String',month_58bus);
 handles.user_input_data.year = year;
 set(handles.edit_year,'String',year);
-handles.user_input_data.start_day = UCGUI_get_start_day(day,month_58bus,year);
+handles.user_input_data.start_day = UCGUI_get_start_day(day_58bus,month_58bus,year);
 % Rooftop PV panel:
 handles.user_input_data.rooftop_pv = rooftop_pv_58bus;
 set(handles.edit_rooftop_pv,'String',rooftop_pv_58bus);
-handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv;
-set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv);
-set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv);
+handles.user_input_data.subtract_rooftop_pv = subtract_rooftop_pv_58bus;
+set(handles.radio_subtract_rooftop_pv,'Value',subtract_rooftop_pv_58bus);
+set(handles.radio_add_rooftop_pv,'Value',~subtract_rooftop_pv_58bus);
 % Bus representation panel (turn off copper plate selection):
 handles.user_input_data.copper_plate = copper_plate;
 set(handles.radio_copper_plate,'Value',copper_plate);
