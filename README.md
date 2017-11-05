@@ -1,6 +1,6 @@
 # UCMatlabToolbox
 
-_A Matlab Unit Commitment Toolbox for Future Grid Modelling for Educational and Research Purposes_
+_A Matlab Unit Commitment Toolbox for Future Grid Modeling for Educational and Research Purposes_
 
 Aaron Ramsden & Gregor Verbi&#269;
 
