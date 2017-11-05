@@ -6,6 +6,12 @@ Aaron Ramsden & Gregor Verbi&#269;
 
 School of Electrical & Information Engineering, Faculty of Engineering and Information Technologies, University of Sydney, New South Wales, Australia
 
+## About
+
+This package is an educational open-source Matlab and CPLEX-based market modeling toolbox for future grid studies. The market model is based on a unit commitment problem  and is suitable for power system analysis involving renewable energy sources and energy storage.
+
+The toolbox includes a simple graphical user interface as well as a suite of input data and case studies that can be simulated without requiring additional files. The software is written in Matlab, with CPLEX as a backend solver. The source code is provided for ease of understanding and modification, which makes the tool suitable for research.
+The toolbox includes a number of case studies to demonstrate the capabilities of the toolbox, using wind, solar, and demand traces published by the Australian Energy Market Operator.
 
 ## License
 
