@@ -10,7 +10,7 @@ function [ gen_data, gen_names, gen_colours ] = UCGUI_generation(file_name)
 %      3. CCGT
 %      4. OCGT
 %      5. CST
-%      6. Utility storage
+%      6. Generic energy storage
 %      7. Wind
 %      8. Utility PV
 % 3. Maximum output (generator capacity)                    (MW)

@@ -248,6 +248,7 @@ num_vars = z_i2; % The total number of variables is Num_vars*T
 
 %% Objective function:
 
+% (User Manual Section 4.3).
 %           |-p_gen*-|-p_use*-----|-theta*-----|-s_gen*-----|-q*---------|-v*---------|-y*-----------|-z*----------|
 f1 = sparse([ srmc_b ; zeros(b,1) ; zeros(b,1) ; zeros(b,1) ; zeros(b,1) ; zeros(b,1) ; start_cost_b ; shut_cost_b ]); % One time step.
 f = repmat(f1,[t,1]); % All time steps.
@@ -264,21 +265,21 @@ O_b_g = zeros(g,b); % Zero matrix, rows without connected generator removed.
 
 disp('    Calculating constraint matrices...');
 
-% Power balance at each bus.
-if copper_plate % APPLIES: GEN BUSES ONLY.
+% Power balance at each bus. (User Manual Section 4.4).
+if copper_plate % APPLIES: GEN BUSES ONLY. (User Manual Section 4.4.2).
     Ablk1 = sparse(1,num_vars);
     Ablk1(gen_index) = 1; % Row to pick out p_gen for busses with generators.
     Ablk1(gen_index+p_use_i1-1) = -1; % Row to pick out -p_use for busses with generators.
     Aeq_pwr_balance = kron(I_t,Ablk1);
     beq_pwr_balance = transpose(sum(demand,1));
-else % APPLIES: EACH BUS.
+else % APPLIES: EACH BUS. (User Manual Section 4.4.1).
     %       |-p_gen*-|-p_use*----|-theta*--------|-s_gen*-|-q*----|-v*----|-y*----|-z*----|
     Ablk1 = [ I_b_b  , -I_b_b    , -b_bus*s_base , O_b_b  , O_b_b , O_b_b , O_b_b , O_b_b ];
     Aeq_pwr_balance = kron(I_t,Ablk1);
     beq_pwr_balance = reshape(demand,[t*b,1]);
 end
 
-% Startup from off, shutdown from on. APPLIES: GEN BUSES ONLY.
+% Startup from off, shutdown from on. APPLIES: GEN BUSES ONLY. (User Manual Section 4.5).
 %       |-p_gen*-|-p_use*-|-theta*-|-s_gen*-|-q*----|-v*----|-y*-----|-z*----|
 Ablk1 = [ O_b_g  , O_b_g  , O_b_g  , O_b_g  , O_b_g , I_b_g , -I_b_g , I_b_g ]; % Atmp is a block used in Aeq_start_shut, this refers to the current time step.
 Aeq_start_shut = kron(I_t,Ablk1); % Diagonal blocks in Aeq_start_shut.
@@ -287,7 +288,7 @@ Ablk2 = [ O_b_g , O_b_g   , O_b_g  , O_b_g  , O_b_g , -I_b_g , O_b_g , O_b_g ]; 
 Aeq_start_shut = Aeq_start_shut + [ sparse(g,num_vars*t) ; kron(speye(t-1),Ablk2) , sparse(g*(t-1),num_vars) ]; % Off-diagonal blocks in Aeq_start_shut.
 beq_start_shut = [ v_initial ; sparse(g*(t-1),1) ];
 
-% Utility storage plant power balance equation. APPLIES: GEN BUSES ONLY.
+% Utility storage plant power balance equation. APPLIES: GEN BUSES ONLY. (User Manual Section 4.6).
 utility_storage_index_g = (type_g == gen_type_utility_storage); % Logical index to pick out utility storage units.
 utility_storage_index_b = (type_b == gen_type_utility_storage);
 num_gen_storage = sum(utility_storage_index_g,1);
@@ -308,14 +309,14 @@ beq = [ beq_pwr_balance ; beq_start_shut ; bineq_utility_storage_balance ];
 
 %% A inequality matrix & b inequality vector:
 
-% Charging / discharging mutually exclusive requirement. GEN BUSES ONLY.
+% Charging / discharging mutually exclusive requirement. GEN BUSES ONLY. (User Manual Section 4.7).
 Ablk1 = sparse(g,num_vars); % Ablk1 is a block used in Aineq sub-matricies.
 Ablk1(:,q_i1:q_i2) = I_b_g; % One block inside Ablk1 is the identity matrix to pick out q.
 Ablk1(:,v_i1:v_i2) = I_b_g; % One block inside Ablk1 is the identity matrix to pick out v.
 Aineq_charge_discharge = kron(I_t,Ablk1); % This creates diagonal blocks of Ablk1.
 bineq_charge_discharge = repmat(ones(g,1),[t,1]);
 
-% Generator output limits. APPLIES: GEN BUSES ONLY.
+% Generator output limits. APPLIES: GEN BUSES ONLY. (User Manual Section 4.8).
 diag_1 = diag(p_min_b); diag_2 = -diag(p_cap_b);
 %       |-p_gen*--|-p_use*-|-theta*-|-s_gen*-|-q*----|-v*------------------|-y*----|-z*----|
 Ablk1 = [  -I_b_g , O_b_g  , O_b_g  , O_b_g  , O_b_g , diag_1(gen_index,:) , O_b_g , O_b_g ;...
@@ -323,7 +324,7 @@ Ablk1 = [  -I_b_g , O_b_g  , O_b_g  , O_b_g  , O_b_g , diag_1(gen_index,:) , O_b
 Aineq_gen_out_lim = kron(I_t,Ablk1);
 bineq_gen_out_lim = repmat(sparse(2*g,1),[t,1]);
 
-% Utility storage charge limits. APPLIES: GEN BUSES ONLY.
+% Utility storage charge limits. APPLIES: GEN BUSES ONLY. (User Manual Section 4.9).
 diag_1 = diag(p_use_min_b); diag_2 = -diag(p_use_max_b);
 %       |-p_gen*--|-p_use*-|-theta*-|-s_gen*-|-q*------------------|-v*----|-y*----|-z*----|
 Ablk1 = [ O_b_g   , -I_b_g , O_b_g  , O_b_g  , diag_1(gen_index,:) , O_b_g , O_b_g , O_b_g ;...
@@ -331,7 +332,7 @@ Ablk1 = [ O_b_g   , -I_b_g , O_b_g  , O_b_g  , diag_1(gen_index,:) , O_b_g , O_b
 Aineq_gen_in_lim = kron(I_t,Ablk1);
 bineq_gen_in_lim = repmat(sparse(2*g,1),[t,1]);
 
-% Generator output ramp up rates. APPLIES: GEN BUSES ONLY.
+% Generator output ramp up rates. APPLIES: GEN BUSES ONLY. (User Manual Section 4.10).
 Ablk1 = sparse(g,num_vars); % Ablk1 is a block used in Aineq sub-matricies.
 Ablk1(:,p_gen_i1:p_gen_i2) = I_b_g; % One block inside Ablk1 is the identity matrix to pick out p_gen.
 Ablk2 = Ablk1;
@@ -342,7 +343,7 @@ Aineq_ramp_up = kron(I_t,Ablk2); % This creates diagonal blocks of Ablk2.
 Aineq_ramp_up = Aineq_ramp_up + [ sparse(g,num_vars*t) ; kron(speye(t-1),-Ablk1) , sparse(g*(t-1),num_vars) ]; % Adding off-diagonal blocks of Aineq_ramp_up.
 bineq_ramp_up = [ ramp_up_g+p_gen_initial ; repmat(ramp_up_g,[t-1,1]) ];
 
-% Generator output ramp down rates. APPLIES: GEN BUSES ONLY.
+% Generator output ramp down rates. APPLIES: GEN BUSES ONLY. (User Manual Section 4.10).
 Ablk2 = -Ablk1; % Pick out -p_gen.
 diag_1 = diag(ramp_down_b-max(ramp_down_b,p_min_b)); %% *** Changed due to previous error *** 20/1/2016 % Diag = diag(Ramp_down_b-p_min_b); *** 4/1/2017 removed tsl from "p_min_b*tsl"
 % Need to multiply p_min_b by tsl because it has not already been adjusted to allow variable tsl, whereas Ramp_down_b has. *** 4/1/2017 incorrect - must allow generator to transition from 0MW to p_min MW regardless of the time step length.
@@ -351,7 +352,7 @@ Aineq_ramp_down = kron(I_t,Ablk2); % This creates diagonal blocks of Ablk2.
 Aineq_ramp_down = Aineq_ramp_down + [sparse(g,num_vars*t) ; kron(eye(t-1),Ablk1) , sparse(g*(t-1),num_vars)]; % Adding off-diagonal blocks of Aineq_ramp_down.
 bineq_ramp_down = [ ramp_down_g-p_gen_initial ; repmat(ramp_down_g,[t-1,1]) ];
 
-% Storage charge rates. APPLIES: GEN BUSES ONLY.
+% Storage charge rates. APPLIES: GEN BUSES ONLY.  (User Manual Section 4.11).
 % Required because p_use is not used for CST generators, so this is the only equation to limit their charge rates.
 Ablk1 = sparse(g,num_vars); % Ablk1 is a block used in Aineq sub-matricies.
 Ablk1(:,s_gen_i1:s_gen_i2) = I_b_g; % One block inside Ablk1 is the identity matrix to pick out s_gen.
@@ -359,25 +360,25 @@ Aineq_charge = kron(I_t,Ablk1); % This creates diagonal blocks of Ablk1.
 Aineq_charge = Aineq_charge + [ sparse(g,num_vars*t) ; kron(speye(t-1),-Ablk1) , sparse(g*(t-1),num_vars) ]; % Adding off-diagonal blocks of Aineq_charge.
 bineq_charge = [ s_rate_max_g+s_gen_initial ; repmat(s_rate_max_g,[t-1,1]) ];
 
-% Storage discharge rates. APPLIES: GEN BUSES ONLY.
+% Storage discharge rates. APPLIES: GEN BUSES ONLY.  (User Manual Section 4.11).
 % Required because p_use is not used for CST generators, so this is the only equation to limit their charge rates.
 Aineq_discharge = kron(I_t,-Ablk1); % This creates diagonal blocks of -Ablk1.
 Aineq_discharge = Aineq_discharge + [ sparse(g,num_vars*t) ; kron(speye(t-1),Ablk1) , sparse(g*(t-1),num_vars) ]; % Adding off-diagonal blocks of Aineq_discharge.
 bineq_discharge = [ s_rate_max_g-s_gen_initial ; repmat(s_rate_max_g,[t-1,1]) ];
 
-% Storage charging ramp up rates. APPLIES: GEN BUSES ONLY.
+% Utility storage charging ramp up rates. APPLIES: GEN BUSES ONLY.  (User Manual Section 4.12).
 Ablk1 = sparse(g,num_vars); % Ablk1 is a block used in Aineq sub-matricies.
 Ablk1(:,p_use_i1:p_use_i2) = I_b_g; % One block inside Ablk1 is the identity matrix to pick out p_use.
 Aineq_charge_ramp_up = kron(I_t,Ablk1); % This creates diagonal blocks of Ablk1.
 Aineq_charge_ramp_up = Aineq_charge_ramp_up + [ sparse(g,num_vars*t) ; kron(speye(t-1),-Ablk1) , sparse(g*(t-1),num_vars) ]; % Adding off-diagonal blocks of Aineq_charge_ramp_up.
 bineq_charge_ramp_up = [ p_use_ramp_up_g+p_use_initial ; repmat(p_use_ramp_up_g,[t-1,1]) ];
 
-% Storage charging ramp down rates. APPLIES: GEN BUSES ONLY.
+% Utility storage charging ramp down rates. APPLIES: GEN BUSES ONLY. (User Manual Section 4.12).
 Aineq_charge_ramp_down = kron(I_t,-Ablk1); % This creates diagonal blocks of Ablk1.
 Aineq_charge_ramp_down = Aineq_charge_ramp_down + [sparse(g,num_vars*t) ; kron(eye(t-1),Ablk1) , sparse(g*(t-1),num_vars)]; % Adding off-diagonal blocks of Aineq_charge_ramp_down.
 bineq_charge_ramp_down = [ p_use_ramp_down_g-p_use_initial ; repmat(p_use_ramp_down_g,[t-1,1]) ];
 
-% mut. APPLIES: GEN BUSES ONLY.
+% MUT. APPLIES: GEN BUSES ONLY. (User Manual Section 4.13).
 Ablk1 = zeros(g,num_vars); % Don't use sparse, slow indexing pattern.
 Ablk2 = Ablk1;
 Ablk2(:,v_i1:v_i2) = -I_b_g; % Block to pick out -v for busses with generators.
@@ -406,7 +407,7 @@ for k = 1:(max(mut_g)-1) % Iterate to add initial conditions.
     bineq_mut((k-1)*g+1:k*g) = bineq_mut_block;
 end
 
-% mdt. APPLIES: GEN BUSES ONLY.
+% MDT. APPLIES: GEN BUSES ONLY. (User Manual Section 4.13).
 Ablk1 = zeros(g,num_vars); % Don't use sparse, slow indexing pattern.
 Ablk2 = Ablk1;
 Ablk2(:,v_i1:v_i2) = I_b_g; % Block to pick out v for busses with generators.
@@ -435,7 +436,7 @@ for k = 1:t % Iterate to add initial conditions:
     bineq_mdt((k-1)*g+1:k*g) = bineq_mdt_block;
 end
 
-% Transmission limits. APPLIES: EACH BUS.
+% Transmission limits. APPLIES: EACH BUS. (User Manual Section 4.14).
 if (copper_plate)
     Aineq_trans_limits = [];
 else
@@ -463,7 +464,7 @@ else
     bineq_trans_limits = repmat(bineq_trans_limits,t,1);
 end
 
-% CST generator thermal storage balance requirements. APPLIES: GEN BUSES ONLY.
+% CST generator thermal storage balance requirements. APPLIES: GEN BUSES ONLY. (User Manual Section 4.15).
 cst_index = (type_g == gen_type_cst); % Logical index to pick out CST generators.
 num_cst = sum(cst_index,1);
 Ablk1 = sparse(num_cst,num_vars);
@@ -475,7 +476,7 @@ Aineq_cst_storage_balance = kron(I_t,Ablk1); % Diagonal blocks.
 Aineq_cst_storage_balance = Aineq_cst_storage_balance + [ sparse(num_cst,num_vars*t) ; kron(speye(t-1),Ablk2) , sparse(num_cst*(t-1),num_vars) ]; % Adding off-diagonal blocks of Aineq_storage_balance.
 bineq_cst_storage_balance = [solar_input(cst_index,1) + s_gen_initial(cst_index)/tsl ; reshape(solar_input(cst_index,2:t),num_cst*(t-1),1)];
 
-% Spinning reserve (synchronous generators only). APPLIES: EACH BUS.
+% Spinning reserve (synchronous generators only). APPLIES: EACH BUS. (User Manual Section 4.17).
 synch_index = (type_b == gen_type_brown_coal) | (type_b == gen_type_black_coal) | (type_b == gen_type_ccgt) | (type_b == gen_type_ocgt) | (type_b == gen_type_cst);
 % Generators not able to provide spinning reserve: gen_type_wind, gen_type_utility_pv, gen_type_utility_storage.
 Ablk1 = sparse(1,num_vars);

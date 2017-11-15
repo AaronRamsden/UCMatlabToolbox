@@ -74,7 +74,7 @@ UC_input.t = t_sim; % Number of time steps per simulation
 %      2. Black Coal
 %      3. CCGT
 %      4. OCGT
-%      5. cst
+%      5. CST
 %      6. Utility storage
 %      7. Wind
 %      8. Utility PV
@@ -108,7 +108,7 @@ srmc = gen_data(:,9);
 s_cap = gen_data(:,12);
 solar_multiple = gen_data(:,18);
 
-UC_input.generation = gen_data(:,1:17); % Do not require cst solar multiple in the solver.
+UC_input.generation = gen_data(:,1:17); % Do not require CST solar multiple in the solver.
 
 % Delete unwanted variables:
 clear gen_data
